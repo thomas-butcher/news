@@ -1,4 +1,4 @@
-from django.shortcuts import TemplateView
+from django.views.generic import TemplateView
 
 # Create your views here.
 class HomePageView(TemplateView):

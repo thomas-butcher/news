@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     # Local
     "accounts",
     "pages",
+    "articles",
 ]
+
+TIME_ZONE = "America/Denver"
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
