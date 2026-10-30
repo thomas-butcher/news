@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ heading }}{% endblock title %}
+
+{% block content %}
+<h2 class="my-3">{{ heading }}</h2>
+
+<ul class="nav nav-pills mb-3">
+    <li class="nav-item"><a class="nav-link {% if is_top %}active{% endif %}" href="{% url 'nyt_top' %}">Top Stories</a></li>
+    <li class="nav-item"><a class="nav-link {% if not is_top %}active{% endif %}" href="{% url 'nyt_popular' %}">Most Popular</a></li>
+</ul>
+
+{% if sections %}
+<div class="mb-3">
+    {% for s in sections %}
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'nyt_top_section' s %}">{{ s|title }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+{% if periods %}
+<div class="mb-3">
+    {% for p in periods %}
+    <a class="btn btn-sm btn-outline-secondary" href="{% url 'nyt_popular_period' p %}">{{ p }} day{{ p|pluralize }}</a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-warning">{{ error }}</div>
+{% endif %}
+
+{% for story in stories %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title"><a href="{{ story.url }}" target="_blank" rel="noopener">{{ story.title }}</a></h5>
+        <p class="card-text">{{ story.abstract }}</p>
+        <small class="text-muted">{{ story.byline }} &middot; {{ story.section|title }} &middot; {{ story.published_date|slice:":10" }}</small>
+    </div>
+</div>
+{% endfor %}
+
+<p class="text-muted small">Data provided by The New York Times.</p>
+{% endblock content %}

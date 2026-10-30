@@ -22,6 +22,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'nyt_top' %}">NYT</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'article_new' %}" class="nav-link px-2 link-dark">+ New</a></li>
             </ul>
